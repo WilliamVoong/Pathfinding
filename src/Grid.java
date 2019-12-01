@@ -23,18 +23,18 @@ public class Grid {
             for (int j = 0; j < HEIGHT; j++) {
 
                 if( player.collision( new Vector(i,j))) {
-                    grid[i][j] = 'o';
+                    grid[j][i] = MARKER.PLAYER.getCharVal();
                 }else if( goal.collision( new Vector(i,j))){
-                    grid[i][j]='G';
+                    grid[j][i]= MARKER.GOAL.getCharVal();
                 }else{
-                    grid[i][j]='-';
+                    grid[j][i]= MARKER.EMPTY.getCharVal();
                 }
             }
         }
         for(Obstacle o: obstacles) {
             for (int i = o.getX(); i < o.getX() + o.getWidth(); i++) {
                 for (int j = o.getY(); j < o.getY() + o.getHeight(); j++) {
-                    grid[i][j] = 'x';
+                    grid[i][j] = MARKER.OBSTACLE.getCharVal();
                 }
 
             }
@@ -43,17 +43,24 @@ public class Grid {
     public char[][] getGrid(){
          return grid;
     };
+    public char getGridelement(int x, int y){
+        return grid[y][x];
+    };
 
     @Override
     public String toString() {
         StringBuilder sb= new StringBuilder();
         for(int i=0; i < WIDTH;i++ ){
             for(int j=0; j < HEIGHT;j++ ){
-                sb.append(grid[i][j]);
+                sb.append(grid[j][i]);
             }
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    Boolean withinBounds(int x, int y){
+        return x < WIDTH && y < HEIGHT && x >= 0 && y >= 0;
     }
 }
 
