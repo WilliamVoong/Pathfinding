@@ -2,6 +2,7 @@ public class Obstacle extends Vector{
 
     private int width;
     private int height;
+    public final static int slowdown= 1000;
 
     Obstacle(int x, int y, int width , int height){
         super(x,y);

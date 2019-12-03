@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Main {
 
@@ -13,8 +14,11 @@ public class Main {
         Grid grid= new Grid(p,g,obstacles);
         grid.create_grid();
         System.out.println(grid);
-        NodeMap nodemap= new NodeMap(grid);
+        NodeMap nodemap= new NodeMap(grid,g,p);
         System.out.println("hello");
-
+        Pathfinding pathfinder= new Pathfinding(nodemap,grid,g,p);
+        PriorityQueue<Node> pque= new PriorityQueue();
+        pque= pathfinder.getFrontier();
+        pque.remove(pque.peek());
     }
 }
