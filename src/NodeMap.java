@@ -19,12 +19,14 @@ public class NodeMap {
         for(int i=0; i < Grid.WIDTH; i++){
            for (int j=0; j< Grid.HEIGHT; j++ ){
                char currentMarker= grid.getGridelement(i,j);
-               if( MARKER.OBSTACLE.getCharVal() != currentMarker) { // not obstacle then
+               if( MARKER.EMPTY.getCharVal() == currentMarker) { // not obstacle then
                    nodes.add(new Node(goal.getDistance(new Vector(j,i)), j, i)); // setting nodevalue to an arbitary large value for the A* algorithm;
                }else if( MARKER.PLAYER.getCharVal() == currentMarker){
-                   nodes.add(new Node(0, j, i));  // set highest priority by assining value 0;
+                   nodes.add(new Node(0, 0, j, i));  // set highest priority by assining value 0;
                }else if( MARKER.OBSTACLE.getCharVal() == currentMarker ){
                    nodes.add(new Node(goal.getDistance(new Vector(j,i)) + Obstacle.slowdown, j, i));
+               }else if( MARKER.GOAL.getCharVal() == currentMarker ){
+                   nodes.add(new Node(0.5, j, i));
                }
            }
         }

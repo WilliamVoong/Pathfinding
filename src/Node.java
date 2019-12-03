@@ -6,18 +6,28 @@ public class Node extends Vector implements Comparable<Node>{
     private LinkedList<Node> connected_nodes;
     private double nodeValue;
     private double edgeValue=120; // we update the
-    private double determisticValue= nodeValue + edgeValue;
+    private double determisticValue;
 
     Node(double nodeValue, int x, int y){
         super(x,y);
         this.nodeValue=nodeValue;
         this.connected_nodes=new LinkedList<Node>();
+        determisticValue=nodeValue+edgeValue;
+
+    }
+    Node(double nodeValue,double edgeValue, int x, int y){
+        super(x,y);
+        this.nodeValue=nodeValue;
+        this.connected_nodes=new LinkedList<Node>();
+        this.edgeValue=0;
+        determisticValue=nodeValue+edgeValue;
 
     }
     Node(int nodeValue, LinkedList<Node> neighbour, int x ,int y){
         super(x,y);
         this.nodeValue=nodeValue;
         this.connected_nodes=neighbour;
+        determisticValue=nodeValue+edgeValue;
     }
     public LinkedList<Node> getConnectedNodes(){
         return connected_nodes;
@@ -44,7 +54,7 @@ public class Node extends Vector implements Comparable<Node>{
         else if(determisticValue>=n.getDetermisticValue()){
             return 1;
         }
-     return 0;
+        return 0;
     };
     @Override
     public boolean equals(Object o){
@@ -87,5 +97,4 @@ public class Node extends Vector implements Comparable<Node>{
         return determisticValue;
     }
 }
-
 
