@@ -5,8 +5,18 @@ import java.util.LinkedList;
 public class Node extends Vector implements Comparable<Node>{
     private LinkedList<Node> connected_nodes;
     private double nodeValue;
-    private double edgeValue=120; // we update the
+    private double edgeValue=0; // we update the
     private double determisticValue;
+
+    public Node getPrevnode() {
+        return prevnode;
+    }
+
+    public void setPrevnode(Node prevnode) {
+        this.prevnode = prevnode;
+    }
+
+    private Node prevnode;
 
     Node(double nodeValue, int x, int y){
         super(x,y);
@@ -95,6 +105,9 @@ public class Node extends Vector implements Comparable<Node>{
 
     public double getDetermisticValue() {
         return determisticValue;
+    }
+    public void UpdateDetermestic(){
+        determisticValue=edgeValue+nodeValue;
     }
 }
 

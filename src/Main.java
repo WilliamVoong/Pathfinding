@@ -17,7 +17,7 @@ public class Main {
         NodeMap nodemap= new NodeMap(grid,g,p);
         System.out.println("hello");
         Pathfinding pathfinder= new Pathfinding(nodemap,grid,g,p);
-        //pathfinder.pathfind();
+        pathfinder.pathfind();
         PriorityQueue<Node> pque;
         pque= pathfinder.getFrontier();
         Node peek=pque.peek();
