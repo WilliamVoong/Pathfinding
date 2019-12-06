@@ -87,8 +87,8 @@ public class Node extends Vector implements Comparable<Node>{
     }
 
     public double neighbourEdge(Node n){
-        boolean horizontal= getX()==n.getX() && (getY()-1==n.getY()) || (getY()+1==n.getY());
-        boolean vertical= getY()==n.getY() && (getX()-1==n.getX()) || (getX()+1==n.getX());
+        boolean horizontal= getX()==n.getX() && ((getY()-1==n.getY()) || (getY()+1==n.getY()));
+        boolean vertical= getY()==n.getY() && ((getX()-1==n.getX()) || (getX()+1==n.getX()));
         return ( horizontal || vertical ) ? 1 : 1.41;
         // since the player can either go diagonal  or straight by 1 step;
         // the distance to the node is either 1 or 1.41

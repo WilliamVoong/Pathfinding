@@ -31,6 +31,9 @@ public class Vector {
             return x==v.getX() && y==v.getY();
     }
 
+    Vector getVector(){
+        return this;
+    }
 
 
 

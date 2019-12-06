@@ -22,9 +22,9 @@ public class Grid {
         for(int i =0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
 
-                if( player.collision( new Vector(i,j))) {
+                if( player.collision( new Vector(j,i))) {
                     grid[j][i] = MARKER.PLAYER.getCharVal();
-                }else if( goal.collision( new Vector(i,j))){
+                }else if( goal.collision( new Vector(j,i))){
                     grid[j][i]= MARKER.GOAL.getCharVal();
                 }else{
                     grid[j][i]= MARKER.EMPTY.getCharVal();
@@ -61,6 +61,10 @@ public class Grid {
 
     Boolean withinBounds(int x, int y){
         return x < WIDTH && y < HEIGHT && x >= 0 && y >= 0;
+    }
+
+    public void setGridelement(char insertedelement,int x, int y) {
+        grid[x][y]=insertedelement;
     }
 }
 
