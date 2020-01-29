@@ -1,14 +1,31 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import javax.swing.Timer;
 
-public class Pathfinding {
+public class Pathfinding extends Button{
     PriorityQueue<Node> frontier= new PriorityQueue<Node>();
     Goal goal;
     LinkedList<Node> visited=new LinkedList<Node>();
-    Pathfinding(NodeMap nodemap,Grid grid, Goal goal, Player player){
-        nodemap= nodemap;
-        nodeMapToPriorityque(nodemap);
+
+    Pathfinding(Grid grid, Goal goal, Player player){
+        super("Pathfind");
+
+        setMaximumSize(new Dimension(40,40));
         this.goal=goal;
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                NodeMap nodeMap= new NodeMap(grid,goal,player);
+                nodeMapToPriorityque(nodeMap);
+                pathfind(grid,player);
+            }
+        });
     }
 
 
@@ -23,7 +40,7 @@ public class Pathfinding {
         return frontier;
     }
 
-    public void pathfind(){
+    public Node pathfind(Grid grid, Player player ){
         PriorityQueue<Node> search= new PriorityQueue<>();
         search.add(frontier.peek());
         Node currentNode=search.peek();
@@ -47,9 +64,33 @@ public class Pathfinding {
             visited.add(currentNode);
             search.remove(currentNode);
         }
-
-
-
-
+        traceGrid(currentNode,player,grid);
+        return currentNode;
     };
-}
+    /**
+     *  traces out the shortest path to grid;
+     * @input n the node of the goal .
+     */
+    private void traceGrid(Node n, Player player, Grid grid){
+        new Thread();
+        LinkedList<Node> forwardnodes = new LinkedList<Node>();
+        while(n.getPrevnode() != null && !n.collision(player)){
+            forwardnodes.addFirst(n);
+            n=n.getPrevnode();
+            grid.setGridelement(MARKER.PATH.getCharVal(),n.getX(),n.getY());
+
+            };
+
+
+
+
+
+
+            System.out.println(grid);
+
+        }
+
+    }
+
+
+

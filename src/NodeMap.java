@@ -18,7 +18,7 @@ public class NodeMap {
     LinkedList<Node> getNodes(Grid grid,Goal goal){
         for(int i=0; i < Grid.WIDTH; i++){
            for (int j=0; j< Grid.HEIGHT; j++ ){
-               char currentMarker= grid.getGridelement(i,j);
+               char currentMarker= grid.getGridelement(i,j).getMarker();
                if( MARKER.EMPTY.getCharVal() == currentMarker) { // not obstacle then
                    nodes.add(new Node(goal.getDistance(new Vector(j,i)), j, i)); // setting nodevalue to an arbitary large value for the A* algorithm;
                }else if( MARKER.PLAYER.getCharVal() == currentMarker){
