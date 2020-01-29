@@ -3,9 +3,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Grid {
-    public final static int WIDTH=15;
-    public final static int HEIGHT=15;
-    private Cell[][] grid=new Cell[15][15];
+    public final static int WIDTH=30;
+    public final static int HEIGHT=30;
+    private Cell[][] grid=new Cell[WIDTH][HEIGHT];
     private ArrayList<Obstacle> obstacles;
     private Player player;
     private Goal goal;
@@ -53,7 +53,7 @@ public class Grid {
     };
 
     public Cell getGridelement(int x, int y){
-        return grid[y][x];
+        return grid[x][y];
     };
 
     @Override
@@ -87,5 +87,7 @@ public class Grid {
 
         }
     }
+
+
 }
 

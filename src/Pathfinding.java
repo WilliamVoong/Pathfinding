@@ -49,9 +49,9 @@ public class Pathfinding extends Button{
             currentNode = search.peek();
             if (!visited.contains(currentNode)) {
                 for (Node n : currentNode.getConnectedNodes()) { // update all neighbour edges
-                    double calculate_edge= currentNode.neighbourEdge(n);
-                    if (n.getEdgeValue() == 0 || n.getEdgeValue() >= currentNode.getEdgeValue() + (currentNode.neighbourEdge(n))) {
-                        n.setEdgeValue(currentNode.neighbourEdge(n) + currentNode.getEdgeValue()); // set the edge value from what it is from the start;
+                    double calculate_edge= currentNode.neighbourEdge(n,grid);
+                    if (n.getEdgeValue() == 0 || n.getEdgeValue() >= currentNode.getEdgeValue() + (currentNode.neighbourEdge(n,grid))) {
+                        n.setEdgeValue(currentNode.neighbourEdge(n,grid) + currentNode.getEdgeValue()); // set the edge value from what it is from the start;
                         n.UpdateDetermestic();
                         n.setPrevnode(currentNode);
                         search.remove(n); // readds it to the que;
@@ -65,28 +65,26 @@ public class Pathfinding extends Button{
             search.remove(currentNode);
         }
         traceGrid(currentNode,player,grid);
+
         return currentNode;
+
     };
     /**
      *  traces out the shortest path to grid;
      * @input n the node of the goal .
      */
     private void traceGrid(Node n, Player player, Grid grid){
-        new Thread();
         LinkedList<Node> forwardnodes = new LinkedList<Node>();
+        //grid.setGridelement(MARKER.PATH.getCharVal(),n.getX(),n.getY());
         while(n.getPrevnode() != null && !n.collision(player)){
             forwardnodes.addFirst(n);
             n=n.getPrevnode();
-            grid.setGridelement(MARKER.PATH.getCharVal(),n.getX(),n.getY());
-
             };
 
-
-
-
-
-
-            System.out.println(grid);
+            for(int i=0; i < forwardnodes.size()-1 ; i++){
+                Node trace= forwardnodes.get(i);
+                grid.setGridelement(MARKER.PATH.getCharVal(),trace.getX(),trace.getY());
+            }
 
         }
 

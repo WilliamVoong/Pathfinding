@@ -4,7 +4,7 @@ public class Obstacle extends Vector{
 
     private int width;
     private int height;
-    public final static int slowdown= 1000;
+    public final static int slowdown= 50000000;
     public final static Color color = Color.black;
 
     Obstacle(int x, int y, int width , int height){

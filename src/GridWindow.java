@@ -10,7 +10,7 @@ public class GridWindow extends JPanel {
         super();
         setSize(WIDTH,HEIGHT);
         setVisible(true);
-        setLayout(new GridLayout(SIZE,SIZE));
+        setLayout(new GridLayout(Grid.WIDTH,Grid.HEIGHT));
 
     }
 
@@ -18,8 +18,8 @@ public class GridWindow extends JPanel {
         Cell grid[][]=g.getGrid();
         //add(grid[6][0]);
 
-        for(int i=0; i < SIZE; i++ ){
-            for(int j=0; j < SIZE; j++){
+        for(int i=0; i < Grid.HEIGHT; i++ ){
+            for(int j=0; j < Grid.WIDTH; j++){
                 add(grid[j][i]);
             }
         }
@@ -27,7 +27,7 @@ public class GridWindow extends JPanel {
     public void update(Grid g){
 
             Cell grid[][]=g.getGrid();
-            for(int i=0; i < i; i++ ){
+            for(int i=0; i < SIZE; i++ ){
                 for(int j=0; j < SIZE; j++){
                     add(grid[i][j]);
                 }

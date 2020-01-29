@@ -4,14 +4,12 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.nio.file.Path;
 
 public class Cell extends JPanel implements MouseListener {
     private char marker;
+
     Cell(){
         super();
         addMouseListener(this);
@@ -21,8 +19,18 @@ public class Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        setBackground(Color.BLACK);
-        setMarker(MARKER.OBSTACLE.getCharVal());
+
+        int value=e.getModifiersEx();
+        int Mouse1Mask= MouseEvent.BUTTON1;
+        int Mouse2Mask= MouseEvent.BUTTON3_DOWN_MASK;
+            setBackground(Color.BLACK);
+            setMarker(MARKER.OBSTACLE.getCharVal());
+
+
+        if( (Mouse2Mask & value) == Mouse2Mask){
+            setBackground(Color.WHITE);
+            setMarker(MARKER.EMPTY.getCharVal());
+        }
     }
 
     @Override
@@ -38,6 +46,20 @@ public class Cell extends JPanel implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         System.out.println(marker);
+        int value=e.getModifiersEx();
+        int Mouse1Mask= MouseEvent.BUTTON1_DOWN_MASK;
+        int Mouse2Mask= MouseEvent.BUTTON3_DOWN_MASK;
+
+        if( (Mouse1Mask & value) == Mouse1Mask){
+            setBackground(Color.BLACK);
+            setMarker(MARKER.OBSTACLE.getCharVal());
+        }
+        value=e.getModifiersEx();
+        System.out.println(value);
+        if( (Mouse2Mask & value) == Mouse2Mask){
+            setBackground(Color.WHITE);
+            setMarker(MARKER.EMPTY.getCharVal());
+        }
 
     }
 
@@ -70,16 +92,19 @@ public class Cell extends JPanel implements MouseListener {
     public void UpdateColor(){
 
         if(marker == MARKER.PLAYER.getCharVal()){
-            setBackground(Player.color);
+            setBackground(Color.BLUE);
         }
         else if (marker == MARKER.PATH.getCharVal()){
-            setBackground(Player.color);
+            setBackground(Color.LIGHT_GRAY);
         }
         else if (marker == MARKER.OBSTACLE.getCharVal()){
             setBackground(Obstacle.color);
         }
         else if (marker == MARKER.GOAL.getCharVal()){
             setBackground(Goal.color);
+        }
+        else if (marker == MARKER.EMPTY.getCharVal()){
+            setBackground(Color.WHITE);
         }
     }
 }

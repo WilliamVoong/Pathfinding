@@ -8,6 +8,7 @@ public class NodeMap {
     private LinkedList<Node> nodes;
     Goal goal;
     Node start;
+
     NodeMap(Grid grid, Goal goal, Player player){
         nodes=new LinkedList<Node>();
         this.goal=goal;
@@ -18,13 +19,16 @@ public class NodeMap {
     LinkedList<Node> getNodes(Grid grid,Goal goal){
         for(int i=0; i < Grid.WIDTH; i++){
            for (int j=0; j< Grid.HEIGHT; j++ ){
-               char currentMarker= grid.getGridelement(i,j).getMarker();
+               char currentMarker= grid.getGridelement(j,i).getMarker();
                if( MARKER.EMPTY.getCharVal() == currentMarker) { // not obstacle then
                    nodes.add(new Node(goal.getDistance(new Vector(j,i)), j, i)); // setting nodevalue to an arbitary large value for the A* algorithm;
                }else if( MARKER.PLAYER.getCharVal() == currentMarker){
                    nodes.add(new Node(0, 0, j, i));  // set highest priority by assining value 0;
                }else if( MARKER.OBSTACLE.getCharVal() == currentMarker ){
-                   nodes.add(new Node(goal.getDistance(new Vector(j,i)) + Obstacle.slowdown, j, i));
+                   Node n= new Node(goal.getDistance(new Vector(j,i)) + Obstacle.slowdown, j, i);
+                   n.setObstacle(true);
+                   nodes.add(n);
+
                }else if( MARKER.GOAL.getCharVal() == currentMarker ){
                    nodes.add(new Node(0.5, j, i));
                }
@@ -35,6 +39,8 @@ public class NodeMap {
        }
        return nodes;
     }
+
+
 
     private LinkedList<Node> neighbour_nodes(Grid grid,int x, int y,Node n){
         LinkedList<Node> neighbours= new LinkedList<Node>();
@@ -62,4 +68,7 @@ public class NodeMap {
     public LinkedList<Node> getNodes() {
         return nodes;
     }
+
+
+
 }

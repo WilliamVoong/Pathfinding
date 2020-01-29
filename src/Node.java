@@ -7,6 +7,7 @@ public class Node extends Vector implements Comparable<Node>{
     private double nodeValue;
     private double edgeValue=0; // we update the
     private double determisticValue;
+    boolean obstacle=false;
 
     public Node getPrevnode() {
         return prevnode;
@@ -86,10 +87,39 @@ public class Node extends Vector implements Comparable<Node>{
         return getX()== x && getY()==y;
     }
 
-    public double neighbourEdge(Node n){
+    public double neighbourEdge(Node n, Grid g){
+
+        boolean obstacle_left= g.withinBounds(getX()-1,getY()) && g.getGridelement(getX()-1,getY()).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_right= g.withinBounds(getX()+1,getY()) &&  g.getGridelement(getX()+1,getY()).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_up= g.withinBounds(getX(),getY()-1) && g.getGridelement(getX(),getY()-1).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_down= g.withinBounds(getX(),getY()+1) && g.getGridelement(getX(),getY()+1).getMarker() == MARKER.OBSTACLE.getCharVal();
+
+        boolean nTopLeftCorner=  getX()==n.getX()+1 && getY()==n.getY()+1;
+        boolean nTopRightCorner=  getX()==n.getX()-1 && getY()==n.getY()+1;
+
+        boolean nBottomLeftCorner=  getX()==n.getX()+1 && getY()==n.getY()-1;
+        boolean nBottomRightCorner=  getX()==n.getX()-1 && getY()==n.getY()-1;
+
         boolean horizontal= getX()==n.getX() && ((getY()-1==n.getY()) || (getY()+1==n.getY()));
         boolean vertical= getY()==n.getY() && ((getX()-1==n.getX()) || (getX()+1==n.getX()));
+
+
+        boolean enclosed_by_obstacles=  (obstacle_left && obstacle_up && nTopLeftCorner) ||
+                                        (obstacle_up && obstacle_right && nTopRightCorner) ||
+                                        (obstacle_left && obstacle_down && nBottomLeftCorner) ||
+                                        (obstacle_right && obstacle_down && nBottomRightCorner);
+
+        if(enclosed_by_obstacles){
+            System.out.println(n.getX() + "" + n.getY());
+            System.out.println(getX() + "" + getY());
+            return Obstacle.slowdown;
+        }
+
+
+
+
         return ( horizontal || vertical ) ? 1 : 1.41;
+
         // since the player can either go diagonal  or straight by 1 step;
         // the distance to the node is either 1 or 1.41
         // it would be "nicer" to calculate the distance arbitary distance, but we use this to improve performance.
@@ -108,6 +138,10 @@ public class Node extends Vector implements Comparable<Node>{
     }
     public void UpdateDetermestic(){
         determisticValue=edgeValue+nodeValue;
+    }
+
+    public void setObstacle(boolean bool){
+        obstacle=bool;
     }
 }
 
