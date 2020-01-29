@@ -16,3 +16,4 @@ And a list of visited nodes, so we dont go to nodes that we already determined
 
 ![](a2e3c354fd978020a4a3f439771d5150.gif)
 
+Note for users: Use mouse leftclick to create obstacles, use Mouse right click to remove.  
