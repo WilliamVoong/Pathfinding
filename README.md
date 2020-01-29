@@ -14,5 +14,5 @@ we therefore have the lowest value path, i.e the shortest path to the goal.
 Solving this problem we used a min-heap (priority que in java) to effiecntly acess the lowest value node. 
 And a list of visited nodes, so we dont go to nodes that we already determined
 
-
+![]a2e3c354fd978020a4a3f439771d5150.gif)
 
