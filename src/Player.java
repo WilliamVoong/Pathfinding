@@ -1,5 +1,7 @@
-public class Player extends Vector{
+import java.awt.*;
 
+public class Player extends Vector{
+    public static Color color = Color.cyan;
     Player(int x , int y){
         super(x,y);
     }
@@ -7,5 +9,6 @@ public class Player extends Vector{
         setX(x+getX());
         setY(x+getY());
     }
+
 
 }
