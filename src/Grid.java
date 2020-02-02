@@ -1,20 +1,36 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 public class Grid {
-    public final static int WIDTH=30;
-    public final static int HEIGHT=30;
+    public final static int WIDTH=100;
+    public final static int HEIGHT=100;
     private Cell[][] grid=new Cell[WIDTH][HEIGHT];
     private ArrayList<Obstacle> obstacles;
     private Player player;
     private Goal goal;
-     Grid(Player player, Goal goal, ArrayList<Obstacle> obstacles){
+    Window window;
+
+
+     Grid(Player player, Goal goal, ArrayList<Obstacle> obstacles,Window w){
         this.player=player;
         this.goal=goal;
         this.obstacles=obstacles;
         init();
         create_grid();
+        window=w;
+         Timer t= new Timer(1, new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 notifyCellColour();
+                 String s= toString();
+                 System.out.print(s);
+             }
+         });
+        //t.start();
     }
      Grid(Player player, Goal goal){
         this.player=player;
@@ -74,6 +90,7 @@ public class Grid {
 
     public void setGridelement(char insertedelement,int x, int y) {
         grid[x][y].setMarker(insertedelement);
+        //window.draw();
     }
     public void setGridelementDelay(char insertedelement,int x, int y) {
         grid[x][y].setMarkerDelay(insertedelement);
@@ -86,6 +103,40 @@ public class Grid {
             }
 
         }
+
+    }
+
+    public void notifyCellColour(){
+            for(int i=0; i < WIDTH;i++){
+                for(int j=0; j < HEIGHT; j++){
+                    Cell c=grid[i][j];
+                    UpdateColor(c);
+                }
+            }
+    }
+
+    public void UpdateColor( Cell c){
+
+        if(c.getMarker()== MARKER.PLAYER.getCharVal()){
+            c.setBackground(Color.BLUE);
+        }
+        else if (c.getMarker() == MARKER.PATH.getCharVal()){
+            c.setBackground(Color.LIGHT_GRAY);
+        }
+        else if (c.getMarker() == MARKER.OBSTACLE.getCharVal()){
+            c.setBackground(Obstacle.color);
+        }
+        else if (c.getMarker()== MARKER.GOAL.getCharVal()){
+            c.setBackground(Goal.color);
+        }
+        else if (c.getMarker() == MARKER.EMPTY.getCharVal()){
+            c.setBackground(Color.WHITE);
+        }
+        else if(c.getMarker()== MARKER.VISITED.getCharVal()){
+            c.setBackground(Color.pink);
+        }
+        c.validate();
+        c.repaint();
     }
 
 

@@ -87,6 +87,35 @@ public class Node extends Vector implements Comparable<Node>{
         return getX()== x && getY()==y;
     }
 
+
+    public boolean NeighbourObstacle(int x,int y, Grid g){
+        boolean obstacle_left= g.withinBounds(getX()-1,getY()) && g.getGridelement(getX()-1,getY()).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_right= g.withinBounds(getX()+1,getY()) &&  g.getGridelement(getX()+1,getY()).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_up= g.withinBounds(getX(),getY()-1) && g.getGridelement(getX(),getY()-1).getMarker() == MARKER.OBSTACLE.getCharVal();
+        boolean obstacle_down= g.withinBounds(getX(),getY()+1) && g.getGridelement(getX(),getY()+1).getMarker() == MARKER.OBSTACLE.getCharVal();
+
+        boolean obstacle=  g.getGridelement(x,y).getMarker() == MARKER.OBSTACLE.getCharVal();
+
+        boolean nTopLeftCorner=  getX()==x+1 && getY()==y+1;
+        boolean nTopRightCorner=  getX()==x-1 && getY()==y+1;
+
+        boolean nBottomLeftCorner=  getX()==x+1 && getY()==y-1;
+        boolean nBottomRightCorner=  getX()==x-1 && getY()==y-1;
+
+        boolean horizontal= getX()==x && ((getY()-1==y || (getY()+1==y)));
+        boolean vertical= getY()==y && ((getX()-1==x) || (getX()+1==x));
+
+
+        boolean enclosed_by_obstacles=  (obstacle_left && obstacle_up && nTopLeftCorner) ||
+                (obstacle_up && obstacle_right && nTopRightCorner) ||
+                (obstacle_left && obstacle_down && nBottomLeftCorner) ||
+                (obstacle_right && obstacle_down && nBottomRightCorner);
+
+
+        return obstacle || enclosed_by_obstacles;
+    }
+
+
     public double neighbourEdge(Node n, Grid g){
 
         boolean obstacle_left= g.withinBounds(getX()-1,getY()) && g.getGridelement(getX()-1,getY()).getMarker() == MARKER.OBSTACLE.getCharVal();

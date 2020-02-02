@@ -5,8 +5,9 @@ public class GridWindow extends JPanel {
     public static int WIDTH=1200;
     public static int HEIGHT=1200;
     public static int SIZE=15;
-    private static final GridWindow instance=new GridWindow();
-    GridWindow(){
+    //private static final GridWindow instance=new GridWindow();
+    Window window;
+    GridWindow(Window w){
         super();
         setSize(WIDTH,HEIGHT);
         setVisible(true);
@@ -35,9 +36,9 @@ public class GridWindow extends JPanel {
 
     }
 
-    public static GridWindow getInstance(){
-        return instance;
-    }
+    //public static GridWindow getInstance(){
+    //    return instance;
+    //}
 
 
 
