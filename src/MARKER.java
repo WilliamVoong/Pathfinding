@@ -3,7 +3,8 @@ public enum MARKER {
     GOAL('G'),
     EMPTY('-'),
     OBSTACLE('x'),
-    PATH('I');
+    PATH('I'),
+    VISITED('v');
 
     private char charvalue;
 

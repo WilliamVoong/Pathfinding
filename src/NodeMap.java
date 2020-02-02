@@ -47,7 +47,7 @@ public class NodeMap {
         for(int i=y-1; i < y+2; i++){
            for(int j=x-1; j < x+2;j++){
                boolean not_current_node= x != j || y !=i;
-               if(  grid.withinBounds(j,i) && not_current_node ){
+               if(  grid.withinBounds(j,i) && not_current_node && !n.NeighbourObstacle(j,i,grid)){
                    n.getConnectedNodes().add(getMatchingNode(j,i));
                }
            }

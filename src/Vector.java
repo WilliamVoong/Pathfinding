@@ -24,7 +24,7 @@ public class Vector {
     }
     public double getDistance(Vector v){
         Vector distance= DistanceVector(v);
-        Double d=   Math.sqrt(distance.getX()*distance.getX()+distance.getY()*distance.getY());
+        Double d=   1.5*Math.sqrt(  (distance.getX()*distance.getX())+(distance.getY()*distance.getY()));
         return d;
     }
     boolean collision(Vector v){

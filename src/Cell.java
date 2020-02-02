@@ -45,7 +45,6 @@ public class Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println(marker);
         int value=e.getModifiersEx();
         int Mouse1Mask= MouseEvent.BUTTON1_DOWN_MASK;
         int Mouse2Mask= MouseEvent.BUTTON3_DOWN_MASK;
@@ -65,7 +64,7 @@ public class Cell extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("ExitSquared");
+
     }
 
     public char getMarker() {
@@ -73,7 +72,7 @@ public class Cell extends JPanel implements MouseListener {
     }
     public void setMarkerDelay(char marker){
         this.marker=marker;
-        Timer t=new Timer(10000, new ActionListener() {
+        Timer t=new Timer(10, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,6 +104,8 @@ public class Cell extends JPanel implements MouseListener {
         }
         else if (marker == MARKER.EMPTY.getCharVal()){
             setBackground(Color.WHITE);
+        }else if (marker == MARKER.VISITED.getCharVal()){
+            setBackground(Color.pink);
         }
     }
 }
