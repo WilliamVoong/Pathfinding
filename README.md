@@ -1,4 +1,4 @@
-# Pathfinding using a varaiation of A star algorithm
+# Pathfinding using a variation of A star algorithm
 
 This program finds the shortest path between two points in the cartesian plane, where there can exist obstacles.
 
