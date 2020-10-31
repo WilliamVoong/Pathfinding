@@ -21,4 +21,4 @@ And a list of visited nodes, so we dont go to nodes that we already determined.
 Note for users: Use mouse leftclick to create obstacles, use Mouse right click to remove.  
 
 # Comments about the code 
-Coupling is high, and can be reduced by creating an abstract class for the Each marker (goal,player,empty...etc) with abstract methods. The program was firstly designed for only console implmentation, so when i expanded it for a gui implmentation, some unnecessary coupling occured since i just define each Marker as an char value, but now the markers has other attributes as colors and need methods to change colors because of the gui implmentation, therefore it would be ideal to have each marker as it own class. 
+Coupling is can be reduced,   and cohesion can be improved by creating an class for the Each marker (goal,player,empty...etc) . The program was firstly designed for only console implmentation, so when i expanded it for a gui implmentation
