@@ -21,4 +21,4 @@ And a list of visited nodes, so we dont go to nodes that we already determined.
 Note for users: Use mouse leftclick to create obstacles, use Mouse right click to remove.  
 
 # Comments about the code 
-Coupling is can be reduced,   and cohesion can be improved by creating an class for the Each marker (goal,player,empty...etc) . The program was firstly designed for only console implmentation and then eventually got expanded into a gui solution
+Coupling can be reduced,  and cohesion can be improved by creating an class for the Each marker (goal,player,empty...etc) . The program was firstly designed for only console implmentation and then eventually got expanded into a gui solution
